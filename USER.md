@@ -107,13 +107,13 @@ Multiple projects tracked in **2nd Brain** — some pro bono, some paid. Only ~2
 
 ### Development
 
-- Git repo: /home/xenu/clawd
+- Git repo: /home/mj/clawd
 - Vercel tokens stored in M-file
 
 ### Tools & Preferences
 
 - **Search:** SerpAPI (https://serpapi.com/)
-- **Voice transcription:** Local Whisper at /home/xenu/.local/bin/whisper (CPU mode)
+- **Voice transcription:** Local Whisper at /home/mj/.local/bin/whisper (CPU mode)
 - **Fast model:** openai/gpt-4.1-mini
 - **Deep reasoning:** openai/gpt-5.2 (via sub-agents)
 

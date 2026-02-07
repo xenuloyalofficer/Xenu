@@ -32,7 +32,7 @@ Things like:
 
 ### Voice Transcription (Whisper)
 
-- Path: `/home/xenu/.local/bin/whisper`
+- Path: `/home/mj/.local/bin/whisper`
 - Model: `small` (~466MB download on first run)
 - Mode: CPU-only (GT 1030 not supported)
 - Usage: `whisper audio.mp3 --model small --device cpu`
