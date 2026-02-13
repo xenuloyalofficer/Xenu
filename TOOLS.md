@@ -59,7 +59,7 @@ You're not alone on this server. Three coding agents live here. **They're your l
 |-------|---------|----------|
 | **Claude Code** | `claude` | Complicated tasks, coding, problem-solving, debugging — **your default** |
 | **Codex CLI** | `codex` | Refactoring, getting unstuck, quick code generation |
-| **Kimi CLI** | `kimi` | Text interpretation, strategy, analysis, second opinions |
+| **Kimi CLI** | `kimi` | Text interpretation, strategy, analysis, coding, second opinions |
 
 ### When to Ask for Help (Not Just Coding!)
 
@@ -87,9 +87,103 @@ bash pty:true workdir:/path/to/project command:"claude 'Build a REST API for man
 # Codex CLI (refactoring, getting unstuck - needs git repo!)
 bash pty:true workdir:/path/to/project command:"codex exec 'Simplify this function'"
 
-# Kimi CLI (text interpretation, strategy)
-bash pty:true command:"kimi 'Analyze this error message and suggest fixes: [paste error]'"
+# Kimi CLI (text interpretation, strategy, coding)
+# One-shot prompt (non-interactive, prints and exits):
+bash pty:true command:"kimi -p 'Analyze this error message and suggest fixes: [paste error]'"
+
+# Interactive session on a project:
+bash pty:true workdir:/path/to/project command:"kimi"
+
+# One-shot prompt on a project:
+bash pty:true workdir:/path/to/project command:"kimi -p 'Refactor the auth module to use JWT'"
 ```
+
+**Kimi CLI — Complete Reference**
+
+| Property | Value |
+|----------|-------|
+| **Binary** | `/home/mj/.local/bin/kimi` |
+| **Version** | 1.9.0 |
+| **Config** | `~/.kimi/config.toml` |
+| **YOLO Mode** | ON by default (auto-approves all actions) |
+| **Model** | kimi-for-coding (powered by kimi-k2.5) |
+| **Python Required** | 3.14+ for `kimi term` TUI mode |
+
+**Key Flags:**
+| Flag | Purpose |
+|------|---------|
+| `-p, --prompt "text"` | **One-shot mode** — runs prompt, exits. For non-interactive tasks |
+| `-w, --work-dir /path` | Set working directory |
+| `-C, --continue` | Resume previous session |
+| `-m, --model name` | Pick specific model |
+| `--yolo, -y` | Auto-approve all actions (default: true) |
+| `--print` | Run in print mode (non-interactive, implies --yolo) |
+| `--no-thinking` | Disable thinking mode (faster) |
+| `--session ID` | Resume specific session |
+
+**How to Use Kimi:**
+
+```bash
+# INTERACTIVE MODE (like Claude Code)
+# Opens TUI, you type commands, Kimi responds
+cd /project && /home/mj/.local/bin/kimi
+
+# Then type: Read file.md and implement X
+# Kimi shows spinner, uses tools, writes files
+
+# ONE-SHOT MODE (non-interactive)
+# Runs once, outputs result, exits
+/home/mj/.local/bin/kimi -p "Analyze this code" -w /project
+
+# With print mode (full non-interactive)
+/home/mj/.local/bin/kimi --print --yolo -p "Refactor auth.ts" -w /project
+```
+
+**Kimi Commands (inside interactive mode):**
+| Command | Action |
+|---------|--------|
+| `/login` | Authenticate with Kimi Code |
+| `/yolo` | Toggle YOLO mode during session |
+| `/web` | Switch to Web UI |
+| `/help` | Show help |
+| `Ctrl+X` | Toggle mode |
+| `Ctrl+C` | Cancel/exit |
+
+**First-Time Login Process:**
+1. Run `kimi` → shows "LLM not set, send /login"
+2. Type `/login` → Enter
+3. Select platform (1 = Kimi Code)
+4. Visit URL in browser: `https://www.kimi.com/code/authorize_device?user_code=XXXX`
+5. Authorize → returns to CLI
+6. Status: "Logged in successfully"
+
+**Spawning Kimi from Rune:**
+```bash
+# Start interactive session
+exec pty:true workdir:/project command:"/home/mj/.local/bin/kimi"
+
+# Monitor progress
+process action:log sessionId:XXX
+
+# Send input to Kimi
+process action:write sessionId:XXX data:"Your prompt here"
+process action:send-keys sessionId:XXX keys:["Return"]
+```
+
+**Kimi's Capabilities:**
+- ✅ Coding with Vision — image/video to code generation
+- ✅ Visual debugging — inspects own output, iterates autonomously  
+- ✅ Agent Swarm — up to 100 parallel sub-agents
+- ✅ Read/write files, run shell commands
+- ✅ Web search, codebase analysis
+- ✅ Strongest open-source model for frontend design
+
+**Design Superpowers:**
+- Upload reference images: `--image file.jpg`
+- Generates complete UIs from screenshots
+- Autonomous visual iteration (creates → looks → fixes)
+
+**Important:** Kimi requires Python 3.14+ for the TUI (`kimi term`). Use the basic `kimi` command instead.
 
 ### The Rules
 
@@ -121,6 +215,28 @@ Then monitor, review the output, and iterate.
 ## Why Separate?
 
 Skills are shared. Your setup is yours. Keeping them apart means you can update skills without losing your notes, and share skills without leaking your infrastructure.
+
+---
+
+## 🔍 Web Search (SerpAPI)
+
+**Status:** Built-in `web_search` tool is disabled. Use direct SerpAPI calls instead.
+
+**API Key:** Stored in `~/.openclaw/.env` as `SERPAPI_KEY`
+
+**Usage:**
+```bash
+# Basic search
+curl -s "https://serpapi.com/search?q=QUERY&api_key=$SERPAPI_KEY"
+
+# With options
+curl -s "https://serpapi.com/search?q=QUERY&api_key=$SERPAPI_KEY&num=10&hl=en"
+
+# Get JSON and parse with jq
+curl -s "https://serpapi.com/search?q=QUERY&api_key=$SERPAPI_KEY" | jq '.organic_results[].title'
+```
+
+**When Maria asks for search:** Use SerpAPI directly via `exec` with curl. Parse results and summarize.
 
 ---
 
