@@ -51,6 +51,36 @@ Things like:
 
 ---
 
+## 🚀 Vercel Deployments
+
+### Git Email Configuration (CRITICAL)
+
+**The Issue:** Vercel uses the **Git commit author email** to verify deployment access, NOT the GitHub account email. If these don't match, auto-deployment fails with:
+> "Git author xenuloyalofficer@github.com must have access to the team..."
+
+**The Fix:** Ensure Git uses your actual email (not GitHub's noreply):
+
+```bash
+# Check current Git email
+cd /path/to/project && git config user.email
+
+# Set to your REAL email (the one with Vercel access)
+git config user.email "xenuloyalofficer@gmail.com"
+git config --global user.email "xenuloyalofficer@gmail.com"
+
+# Verify
+git config user.email  # Should show: xenuloyalofficer@gmail.com
+```
+
+**Why this happens:**
+- GitHub's web interface commits use `xenuloyalofficer@github.com` (noreply)
+- Vercel CLI deployments use the Git email configured locally
+- Mismatch = deployment rejected
+
+**Prevention:** Always set Git email explicitly on new machines/repos.
+
+---
+
 ## 🤖 Coding Agents (Your Neighbours)
 
 You're not alone on this server. Three coding agents live here. **They're your lifeline when you hit a wall.**
