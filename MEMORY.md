@@ -14,6 +14,11 @@
 - **Response pattern:** Maria replies "done" or "can't + why" for rescheduling
 - **Approaches saved:** low/normal/high energy variations
 
+### Temporary Schedule (Feb 17-21, 2026)
+- **Holiday week:** Nature walks instead of treadmill
+- **Time:** 11:00 (weekdays only)
+- **Reverts to normal:** Feb 24, 2026
+
 ### Task Tracker
 - URL: https://2ndbrain-kappa.vercel.app
 - Confirm updates with: what changed, %, next task

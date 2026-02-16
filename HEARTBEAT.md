@@ -11,8 +11,14 @@
 - Send personal message: "🏃 TREADMILL TIME — It's 07:30! Time for your 30-minute treadmill session. Reply 'done' when finished or 'can't + reason' if rescheduling needed."
 - Do NOT rely on system alerts - PERSONAL MESSAGE REQUIRED
 
+**TEMPORARY: Week of Feb 17-21 (Holidays)** — Skip 07:30 check. See 11:00 Nature Walk note below.
+
 ### 10:30 WET - Weekend Treadmill Check (Sat/Sun only)
 - Same as above, but for weekend schedule
+
+### 11:00 WET - Nature Walk Check (Feb 17-21 only)
+- **Holiday week schedule:** Nature walks instead of treadmill
+- Send: "🌿 NATURE WALK TIME — It's 11:00! Time for your walk. Reply 'done' when finished."
 
 ---
 
@@ -71,4 +77,4 @@ If heartbeat isn't firing as expected:
 2. Verify HEARTBEAT.md exists and is readable
 3. Check gateway logs for errors
 
-Last updated: 2026-02-13
+Last updated: 2026-02-15 (Holiday week schedule added)
