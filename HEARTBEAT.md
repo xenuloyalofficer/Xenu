@@ -77,4 +77,19 @@ If heartbeat isn't firing as expected:
 2. Verify HEARTBEAT.md exists and is readable
 3. Check gateway logs for errors
 
-Last updated: 2026-02-15 (Holiday week schedule added)
+## Backup Automation (Auto-Configured)
+
+### memory-browser Repo (Primary)
+- **URL:** https://github.com/xenuloyalofficer/memory-browser
+- **Auto-push on commit:** ✓ (post-commit hook)
+- **Hourly auto-sync:** ✓ (cron job)
+- **Script:** `/home/mj/.local/bin/memory-browser-sync.sh`
+
+### Xenu Repo (Secondary Backup)
+- **URL:** https://github.com/xenuloyalofficer/Xenu
+- **Daily backup:** ✓ (via rune-backup.sh at 12:00)
+- **Script:** `/home/mj/.local/bin/rune-backup.sh`
+
+Both repos stay in sync automatically. No manual intervention needed.
+
+Last updated: 2026-02-16 (Backup automation added)
