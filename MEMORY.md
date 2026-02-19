@@ -31,13 +31,13 @@
 - **Status:** Back office fixed, uploads in progress
 - **Remaining:** ~2 hours to complete file uploads
 - **Next:** Send to client for help with uploads and store placement
-- **Repo:** `~/active-projects/jocril/` (jocrilstore-hue/jocril-store)
+- **Repo:** `/mnt/usb-ssd/repos/projects/active-projects/jocril/` (jocrilstore-hue/jocril-store)
 
 ### Flowbridge
 - **Status:** Templates being prepared for sale; HTML-to-Webflow tool fine-tuning
 - **Templates:** Uploading ready-made templates
 - **Import tool:** Much more advanced, fewer errors; fixing layouts and details
-- **Repo:** `~/active-projects/flowbridge/` (Maria-the2nd/flow-stach)
+- **Repo:** `/mnt/usb-ssd/repos/projects/active-projects/flowbridge/` (Maria-the2nd/flow-stach)
 
 ### 2nd Brain
 - **Status:** Operational

@@ -4,6 +4,46 @@ Skills define _how_ tools work. This file is for _your_ specifics — the stuff 
 
 ## What Goes Here
 
+### Storage Canonical Paths (as of 2026-02-18)
+
+- **Repos root:** `/mnt/usb-ssd/repos`
+- **Docs root:** `/mnt/usb-ssd/docs`
+- **Data root:** `/mnt/usb-ssd/data`
+- Legacy paths under `/home/mj/{workspace,projects,2,2ndbrain,rune-memory}` are now symlinks to the SSD.
+
+### Windows ↔ Linux Dev Tunnel (Localhost Forwarding)
+
+Use this when Maria wants to open a Linux dev server in Windows browser.
+
+1. **Windows (PowerShell/CMD): open SSH tunnel and keep terminal open**
+   ```bash
+   ssh -L 3000:localhost:3000 mj@100.110.190.12
+   ```
+
+2. **Linux (new terminal/session): start project dev server**
+   ```bash
+   cd /mnt/usb-ssd/repos/flowbridge
+   npm run dev
+   ```
+   - For other projects, change only the `cd` path and/or port/start command.
+
+3. **Windows browser**
+   - Open: `http://localhost:3000`
+   - This shows Linux `localhost:3000` through the tunnel.
+
+**Template for any port/project:**
+```bash
+# Windows
+ssh -L <LOCAL_PORT>:localhost:<REMOTE_PORT> mj@100.110.190.12
+
+# Linux
+cd /mnt/usb-ssd/repos/<project>
+npm run dev -- --port <REMOTE_PORT>
+
+# Windows browser
+http://localhost:<LOCAL_PORT>
+```
+
 Things like:
 
 - Camera names and locations
@@ -228,7 +268,7 @@ process action:send-keys sessionId:XXX keys:["Return"]
 Instead of struggling to write skill code yourself:
 
 ```bash
-bash pty:true workdir:~/workspace/botgames command:"claude 'Create an OpenClaw skill for the BotGames API. The API docs are in skill.md. Follow the skill-creator workflow.'"
+bash pty:true workdir:/mnt/usb-ssd/repos/workspace/botgames command:"claude 'Create an OpenClaw skill for the BotGames API. The API docs are in skill.md. Follow the skill-creator workflow.'"
 ```
 
 Then monitor, review the output, and iterate.
@@ -239,7 +279,7 @@ Then monitor, review the output, and iterate.
 
 - **Config file:** `~/.config/botgames/credentials.json`
 - **Format:** `{"api_key": "...", "agent_name": "Rune"}`
-- **Skill location:** `~/workspace/botgames/`
+- **Skill location:** `/mnt/usb-ssd/repos/workspace/botgames/`
 - **Strategy:** Scizsors Protocol (6-layer adaptive) - see `references/scizsors-protocol.md`
 
 ## Why Separate?

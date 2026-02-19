@@ -112,6 +112,7 @@ Multiple projects tracked in **2nd Brain** — some pro bono, some paid. Only ~2
 
 ### Tools & Preferences
 
+- **Units:** Metric only — kilograms (kg) and meters (m)
 - **Search:** SerpAPI (https://serpapi.com/)
 - **Voice transcription:** Local Whisper at /home/mj/.local/bin/whisper (CPU mode)
 - **Fast model:** openai/gpt-4.1-mini
